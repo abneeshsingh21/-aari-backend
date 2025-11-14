@@ -11,9 +11,14 @@ import time
 from typing import Dict, Any, List
 import logging
 import requests
-import pyautogui
 from datetime import datetime, timedelta
 import re
+
+# Optional import for desktop automation (not needed in cloud)
+try:
+    import pyautogui
+except ImportError:
+    pyautogui = None
 
 logger = logging.getLogger(__name__)
 
@@ -298,17 +303,23 @@ class AutomationEngine:
     
     def _click_element(self, command: str) -> Dict[str, Any]:
         """Click UI elements"""
+        if not pyautogui:
+            return {"status": "error", "message": "Desktop automation not available in cloud"}
         pyautogui.click(960, 540)  # Center of screen
         return {"status": "success", "message": "Element clicked"}
     
     def _type_text(self, command: str) -> Dict[str, Any]:
         """Type text into active window"""
+        if not pyautogui:
+            return {"status": "error", "message": "Desktop automation not available in cloud"}
         text = command.replace("type", "").strip()
         pyautogui.typewrite(text)
         return {"status": "success", "message": f"Typed: {text}"}
     
     def _scroll_screen(self, command: str) -> Dict[str, Any]:
         """Scroll screen up or down"""
+        if not pyautogui:
+            return {"status": "error", "message": "Desktop automation not available in cloud"}
         if "up" in command.lower():
             pyautogui.scroll(5)
         else:
@@ -317,6 +328,8 @@ class AutomationEngine:
     
     def _take_screenshot(self) -> Dict[str, Any]:
         """Take screenshot"""
+        if not pyautogui:
+            return {"status": "error", "message": "Desktop automation not available in cloud"}
         screenshot = pyautogui.screenshot()
         screenshot.save('screenshot.png')
         return {"status": "success", "message": "Screenshot saved"}
