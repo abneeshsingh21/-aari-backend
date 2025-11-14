@@ -1,5 +1,9 @@
-theme: null
-plugins: []
+title: AARI Voice Assistant
+description: Intelligent Voice Assistant for Desktop & Android
+url: https://abneeshsingh21.github.io/-aari-backend
+baseurl: /-aari-backend
+encoding: utf-8
+
 exclude:
   - node_modules
   - backend
@@ -8,3 +12,13 @@ exclude:
   - desktop
   - .github
   - bin
+  - README.md
+  - LICENSE
+  - "*.sh"
+  - "*.bat"
+
+include:
+  - docs
+
+markdown: kramdown
+
