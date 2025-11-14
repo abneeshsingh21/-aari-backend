@@ -3,8 +3,6 @@ Core Voice Assistant Engine
 Advanced AI-powered voice assistant with natural language processing
 """
 
-import speech_recognition as sr
-import spacy
 import json
 import os
 import subprocess
@@ -12,11 +10,31 @@ import webbrowser
 from datetime import datetime
 from typing import Dict, List, Any
 import logging
-from gtts import gTTS
-from pydub import AudioSegment
 import io
 import tempfile
 import time
+
+# Optional imports for cloud compatibility
+try:
+    import speech_recognition as sr
+except ImportError:
+    sr = None
+    
+try:
+    import spacy
+except ImportError:
+    spacy = None
+
+try:
+    from gtts import gTTS
+except ImportError:
+    gTTS = None
+
+try:
+    from pydub import AudioSegment
+except ImportError:
+    AudioSegment = None
+
 from task_executor import TaskExecutor
 from advanced_executor import AdvancedTaskExecutor, AARIAdvanced
 from nlp_processor import NLPProcessor
@@ -34,7 +52,8 @@ class VoiceAssistant:
     """Main voice assistant class with advanced capabilities"""
     
     def __init__(self):
-        self.recognizer = sr.Recognizer()
+        # Initialize recognizer only if available
+        self.recognizer = sr.Recognizer() if sr else None
         self.nlp_processor = NLPProcessor()
         self.task_executor = TaskExecutor()
         self.advanced_executor = AARIAdvanced()
@@ -45,10 +64,15 @@ class VoiceAssistant:
         self.self_learning = SelfLearningSystem()  # Initialize self-learning
         self.web_search = WebSearchEngine()  # Initialize web search
         
-        # Load NLP model
-        try:
-            self.nlp = spacy.load("en_core_web_sm")
-        except:
+        # Load NLP model only if available
+        self.nlp = None
+        if spacy:
+            try:
+                self.nlp = spacy.load("en_core_web_sm")
+            except:
+                logger.warning("Spacy model not available, NLP limited")
+        else:
+            logger.warning("Spacy not available, NLP disabled")
             logger.warning("Spacy model not found. Install with: python -m spacy download en_core_web_sm")
         
         self.running = False
