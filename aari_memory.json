@@ -1,0 +1,230 @@
+{
+  "user_name": "avnish",
+  "preferences": {},
+  "important_conversations": [
+    {
+      "title": "Morning Alarm",
+      "content": "{\"time\": \"6:00 AM\", \"type\": \"alarm\", \"repeat\": \"daily\", \"purpose\": \"wake up\"}",
+      "category": "reminder",
+      "timestamp": "2025-11-14T04:45:50.629533",
+      "tags": [
+        "{\"time\":",
+        "\"6:00",
+        "am\",",
+        "\"type\":",
+        "\"alarm\",",
+        "\"repeat\":",
+        "\"daily\",",
+        "\"purpose\":",
+        "\"wake",
+        "up\"}"
+      ]
+    },
+    {
+      "title": "Medication Reminder",
+      "content": "{\"time\": \"8:00 AM\", \"type\": \"medication\", \"frequency\": \"twice daily\", \"medicine\": \"Vitamin D\"}",
+      "category": "reminder",
+      "timestamp": "2025-11-14T04:45:50.635859",
+      "tags": [
+        "{\"time\":",
+        "\"8:00",
+        "am\",",
+        "\"type\":",
+        "\"medication\",",
+        "\"frequency\":",
+        "\"twice",
+        "daily\",",
+        "\"medicine\":",
+        "\"vitamin"
+      ]
+    },
+    {
+      "title": "Meeting Reminder",
+      "content": "{\"time\": \"10:00 AM\", \"type\": \"meeting\", \"attendees\": [\"John\", \"Sarah\"], \"location\": \"Conference Room\"}",
+      "category": "reminder",
+      "timestamp": "2025-11-14T04:45:50.637695",
+      "tags": [
+        "{\"time\":",
+        "\"10:00",
+        "am\",",
+        "\"type\":",
+        "\"meeting\",",
+        "\"attendees\":",
+        "[\"john\",",
+        "\"sarah\"],",
+        "\"location\":",
+        "\"conference",
+        "room\"}"
+      ]
+    },
+    {
+      "title": "Morning Alarm",
+      "content": "{\"time\": \"6:00 AM\", \"type\": \"alarm\", \"repeat\": \"daily\", \"purpose\": \"wake up\"}",
+      "category": "reminder",
+      "timestamp": "2025-11-14T04:46:27.742284",
+      "tags": [
+        "{\"time\":",
+        "\"6:00",
+        "am\",",
+        "\"type\":",
+        "\"alarm\",",
+        "\"repeat\":",
+        "\"daily\",",
+        "\"purpose\":",
+        "\"wake",
+        "up\"}"
+      ]
+    },
+    {
+      "title": "Medication Reminder",
+      "content": "{\"time\": \"8:00 AM\", \"type\": \"medication\", \"frequency\": \"twice daily\", \"medicine\": \"Vitamin D\"}",
+      "category": "reminder",
+      "timestamp": "2025-11-14T04:46:27.742284",
+      "tags": [
+        "{\"time\":",
+        "\"8:00",
+        "am\",",
+        "\"type\":",
+        "\"medication\",",
+        "\"frequency\":",
+        "\"twice",
+        "daily\",",
+        "\"medicine\":",
+        "\"vitamin"
+      ]
+    },
+    {
+      "title": "Meeting Reminder",
+      "content": "{\"time\": \"10:00 AM\", \"type\": \"meeting\", \"attendees\": [\"John\", \"Sarah\"], \"location\": \"Conference Room\"}",
+      "category": "reminder",
+      "timestamp": "2025-11-14T04:46:27.742284",
+      "tags": [
+        "{\"time\":",
+        "\"10:00",
+        "am\",",
+        "\"type\":",
+        "\"meeting\",",
+        "\"attendees\":",
+        "[\"john\",",
+        "\"sarah\"],",
+        "\"location\":",
+        "\"conference",
+        "room\"}"
+      ]
+    },
+    {
+      "title": "Morning Alarm",
+      "content": "{\"time\": \"6:00 AM\", \"type\": \"alarm\", \"repeat\": \"daily\", \"purpose\": \"wake up\"}",
+      "category": "reminder",
+      "timestamp": "2025-11-14T04:46:47.269351",
+      "tags": [
+        "{\"time\":",
+        "\"6:00",
+        "am\",",
+        "\"type\":",
+        "\"alarm\",",
+        "\"repeat\":",
+        "\"daily\",",
+        "\"purpose\":",
+        "\"wake",
+        "up\"}"
+      ]
+    },
+    {
+      "title": "Medication Reminder",
+      "content": "{\"time\": \"8:00 AM\", \"type\": \"medication\", \"frequency\": \"twice daily\", \"medicine\": \"Vitamin D\"}",
+      "category": "reminder",
+      "timestamp": "2025-11-14T04:46:47.269351",
+      "tags": [
+        "{\"time\":",
+        "\"8:00",
+        "am\",",
+        "\"type\":",
+        "\"medication\",",
+        "\"frequency\":",
+        "\"twice",
+        "daily\",",
+        "\"medicine\":",
+        "\"vitamin"
+      ]
+    },
+    {
+      "title": "Meeting Reminder",
+      "content": "{\"time\": \"10:00 AM\", \"type\": \"meeting\", \"attendees\": [\"John\", \"Sarah\"], \"location\": \"Conference Room\"}",
+      "category": "reminder",
+      "timestamp": "2025-11-14T04:46:47.269351",
+      "tags": [
+        "{\"time\":",
+        "\"10:00",
+        "am\",",
+        "\"type\":",
+        "\"meeting\",",
+        "\"attendees\":",
+        "[\"john\",",
+        "\"sarah\"],",
+        "\"location\":",
+        "\"conference",
+        "room\"}"
+      ]
+    },
+    {
+      "title": "Morning Alarm",
+      "content": "{\"time\": \"6:00 AM\", \"type\": \"alarm\", \"repeat\": \"daily\", \"purpose\": \"wake up\"}",
+      "category": "reminder",
+      "timestamp": "2025-11-14T04:46:56.985601",
+      "tags": [
+        "{\"time\":",
+        "\"6:00",
+        "am\",",
+        "\"type\":",
+        "\"alarm\",",
+        "\"repeat\":",
+        "\"daily\",",
+        "\"purpose\":",
+        "\"wake",
+        "up\"}"
+      ]
+    },
+    {
+      "title": "Medication Reminder",
+      "content": "{\"time\": \"8:00 AM\", \"type\": \"medication\", \"frequency\": \"twice daily\", \"medicine\": \"Vitamin D\"}",
+      "category": "reminder",
+      "timestamp": "2025-11-14T04:46:56.985601",
+      "tags": [
+        "{\"time\":",
+        "\"8:00",
+        "am\",",
+        "\"type\":",
+        "\"medication\",",
+        "\"frequency\":",
+        "\"twice",
+        "daily\",",
+        "\"medicine\":",
+        "\"vitamin"
+      ]
+    },
+    {
+      "title": "Meeting Reminder",
+      "content": "{\"time\": \"10:00 AM\", \"type\": \"meeting\", \"attendees\": [\"John\", \"Sarah\"], \"location\": \"Conference Room\"}",
+      "category": "reminder",
+      "timestamp": "2025-11-14T04:46:56.985601",
+      "tags": [
+        "{\"time\":",
+        "\"10:00",
+        "am\",",
+        "\"type\":",
+        "\"meeting\",",
+        "\"attendees\":",
+        "[\"john\",",
+        "\"sarah\"],",
+        "\"location\":",
+        "\"conference",
+        "room\"}"
+      ]
+    }
+  ],
+  "reminders": [],
+  "contacts": {},
+  "learned_facts": {},
+  "daily_notes": {}
+}

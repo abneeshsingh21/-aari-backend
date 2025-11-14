@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: aari-backend
+    runtime: python
+    pythonVersion: 3.11
+    buildCommand: "pip install --upgrade pip setuptools wheel && pip install --only-binary :all: -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: PIP_NO_CACHE_DIR
+        value: "1"
+      - key: PORT
+        value: 8080
+    autoDeploy: true

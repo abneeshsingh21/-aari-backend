@@ -1,0 +1,16 @@
+service: aari-voice-backend
+runtime: python311
+
+env: standard
+instances: 1
+
+env_variables:
+  PORT: "8080"
+
+handlers:
+- url: /.*
+  script: auto
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 5
