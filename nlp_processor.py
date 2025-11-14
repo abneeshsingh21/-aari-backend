@@ -3,7 +3,11 @@ NLP Processor for intent extraction and natural language understanding
 Uses spaCy, TextBlob, scikit-learn, and Google's Generative AI
 """
 
-import spacy
+try:
+    import spacy
+except ImportError:
+    spacy = None
+
 from textblob import TextBlob
 import json
 import logging
@@ -11,8 +15,14 @@ from typing import Tuple, Dict, Any
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
+
+try:
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.naive_bayes import MultinomialNB
+except ImportError:
+    TfidfVectorizer = None
+    MultinomialNB = None
+
 import time
 
 load_dotenv()
@@ -24,11 +34,15 @@ class NLPProcessor:
     """Process natural language and extract intents"""
     
     def __init__(self):
-        try:
-            self.nlp = spacy.load("en_core_web_sm")
-        except:
-            logger.warning("SpaCy model not loaded")
-            self.nlp = None
+        self.nlp = None
+        if spacy:
+            try:
+                self.nlp = spacy.load("en_core_web_sm")
+            except:
+                logger.warning("SpaCy model not loaded")
+                self.nlp = None
+        else:
+            logger.warning("SpaCy not available, using fallback NLP")
         
         # Initialize Google Generative AI
         api_key = os.getenv("GOOGLE_API_KEY", "")
@@ -70,6 +84,13 @@ class NLPProcessor:
     
     def _init_fast_classifier(self):
         """Initialize scikit-learn TF-IDF + Naive Bayes classifier with 300+ examples per intent"""
+        if not TfidfVectorizer or not MultinomialNB:
+            logger.warning("Scikit-learn not available, using keyword-based fallback NLP")
+            self.ml_ready = False
+            self.classifier = None
+            self.tfidf = None
+            return
+            
         try:
             # COMPREHENSIVE training dataset with 300+ examples per intent for better accuracy
             training_data = {
