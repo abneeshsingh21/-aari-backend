@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: aari-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - SENDER_EMAIL=${SENDER_EMAIL}
+      - SENDER_PASSWORD=${SENDER_PASSWORD}
+    volumes:
+      - ./backend:/app
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    build: ./VoiceAssistantApp
+    container_name: aari-frontend
+    ports:
+      - "8081:8081"
+    environment:
+      - BACKEND_URL=http://backend:5000
+    volumes:
+      - ./VoiceAssistantApp:/app
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # Optional: Add more services as needed
+  # postgres:
+  #   image: postgres:15
+  #   container_name: aari-db
+  #   environment:
+  #     POSTGRES_PASSWORD: ${DB_PASSWORD}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+
+volumes:
+  postgres_data:
+    driver: local

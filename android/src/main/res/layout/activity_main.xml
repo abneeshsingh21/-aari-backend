@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000">
+
+    <!-- Header with Assistant Name -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:background="#1a1a1a">
+
+        <TextView
+            android:id="@+id/assistant_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="AARI"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#ffffff" />
+
+        <ImageButton
+            android:id="@+id/settings_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_settings"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="Settings"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+
+    <!-- Chat History -->
+    <ListView
+        android:id="@+id/chat_history"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:background="#000000" />
+
+    <!-- Status Text -->
+    <TextView
+        android:id="@+id/status_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ready..."
+        android:textSize="14sp"
+        android:textColor="#888888"
+        android:gravity="center"
+        android:padding="12dp"
+        android:background="#1a1a1a" />
+
+    <!-- Input Area -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="12dp"
+        android:background="#1a1a1a">
+
+        <!-- Microphone Button (Large) -->
+        <ImageButton
+            android:id="@+id/mic_button"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:src="@drawable/ic_mic"
+            android:background="@drawable/mic_button_bg"
+            android:scaleType="fitCenter"
+            android:contentDescription="Microphone"
+            android:layout_marginRight="12dp" />
+
+        <!-- Text Input -->
+        <EditText
+            android:id="@+id/command_input"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:hint="Say something or type..."
+            android:textColor="#ffffff"
+            android:textColorHint="#666666"
+            android:textSize="14sp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@drawable/input_background"
+            android:inputType="text"
+            android:layout_marginRight="12dp" />
+
+        <!-- Send Button -->
+        <Button
+            android:id="@+id/send_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="⟶"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/send_button_bg"
+            android:contentDescription="Send" />
+
+    </LinearLayout>
+
+</LinearLayout>
+

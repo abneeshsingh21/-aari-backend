@@ -1,0 +1,194 @@
+# ⚡ AARI Quick Reference Card
+
+## 🚀 3-Step Quick Start
+
+### Step 1: Deploy to Cloud (5 min)
+```powershell
+cd "c:\Users\lenovo\Desktop\aari\VoiceAssistant"
+.\DEPLOY_TO_HEROKU.bat
+# Note the URL: https://your-app-name.herokuapp.com
+```
+
+### Step 2: Update Android App (5 min)
+Edit: `android/src/main/java/com/voiceassistant/app/ApiClient.java`
+```java
+private static final String CLOUD_BACKEND = "https://your-app-name.herokuapp.com/api";
+```
+
+### Step 3: Build & Install (5 min)
+```
+Android Studio → Build → Build APK → Install
+```
+
+---
+
+## 🎤 Voice Commands
+
+| What to Say | What AARI Does |
+|---|---|
+| "Hey AARI" | Wakes up |
+| "What time is it?" | Tells current time |
+| "Send WhatsApp to John saying hello" | Sends message |
+| "Call Mom" | Makes phone call |
+| "Play music" | Plays music |
+| "Open Chrome" | Launches app |
+| "Set reminder for 3pm" | Creates reminder |
+| "Search for Python" | Web search |
+| "Lock screen" | Locks device |
+
+---
+
+## 📱 Phone Settings
+
+**Critical for 24/7 Operation:**
+
+1. **Background Mode** (in AARI app)
+   - Settings → ✅ Background Mode
+   - Settings → ✅ Always Listening
+
+2. **Battery Optimization** (in Phone Settings)
+   - Settings → Apps → AARI
+   - Battery → Don't Optimize
+   - ⚠️ MUST DO THIS!
+
+---
+
+## 🌐 Backend URLs
+
+**Cloud (24/7, Recommended):**
+```
+https://your-app-name.herokuapp.com/api/health
+```
+
+**Local (Fast, PC Must Be On):**
+```
+http://192.168.x.x:5000/api/health
+```
+
+Replace `192.168.x.x` with your PC's IP:
+```powershell
+ipconfig  # Windows
+ifconfig | grep "inet"  # Mac/Linux
+```
+
+---
+
+## 🔧 Configuration Files
+
+| File | Purpose |
+|------|---------|
+| `backend/.env` | API keys |
+| `android/src/main/java/com/voiceassistant/app/ApiClient.java` | Backend URL |
+| `backend/contacts.json` | Phone contacts |
+| `backend/app.py` | Backend server |
+
+---
+
+## ✅ Verification Checklist
+
+- [ ] Heroku app deployed
+- [ ] Health endpoint returns {"status":"healthy"}
+- [ ] Android app updated with Heroku URL
+- [ ] APK built and installed
+- [ ] All permissions granted
+- [ ] Background Mode enabled
+- [ ] Battery optimization disabled
+- [ ] "Hey AARI" works
+- [ ] At least one command works
+- [ ] Works with locked screen
+- [ ] Works in background
+- [ ] Works on 4G/5G (not just WiFi)
+
+---
+
+## 🆘 Quick Fixes
+
+| Problem | Solution |
+|---------|----------|
+| Wake word not detected | Restart app + Check background mode |
+| Can't connect | Check Heroku URL in ApiClient.java |
+| Slow response | Use cloud backend (not local PC) |
+| Crashes on startup | Clear app cache: Settings → Apps → AARI → Storage → Clear Cache |
+| No audio | Check volume + restart phone |
+
+---
+
+## 📊 Status Check
+
+**Check backend health:**
+```powershell
+Invoke-WebRequest -Uri "https://your-app.herokuapp.com/api/health"
+```
+
+**View Heroku logs:**
+```powershell
+heroku logs --tail --app your-app-name
+```
+
+**Check Android logs:**
+- Android Studio → Logcat → Filter: "AARI"
+
+---
+
+## 🎯 Current Status
+
+After completing all steps:
+
+```
+✅ Android app installed
+✅ Background mode active
+✅ Cloud backend running 24/7
+✅ Auto-start on boot enabled
+✅ "Hey AARI" wake word active
+✅ Works anywhere
+✅ Works with PC off
+✅ Auto-syncs every 5 minutes
+✅ Offline mode supported
+```
+
+**Your AARI is ready! 🚀**
+
+---
+
+## 📞 Quick Commands
+
+```powershell
+# Start local backend
+cd backend
+venv\Scripts\Activate.ps1
+python app.py
+
+# Deploy to Heroku
+DEPLOY_TO_HEROKU.bat
+
+# Check Heroku app
+heroku open --app your-app-name
+
+# View app logs
+heroku logs --tail --app your-app-name
+
+# Restart Heroku app
+heroku restart --app your-app-name
+```
+
+---
+
+## 🌍 Works From
+
+- ✅ Home WiFi
+- ✅ Office WiFi
+- ✅ Mobile 4G/5G
+- ✅ Coffee shop
+- ✅ Anywhere on Earth
+
+PC Status:
+- ✅ Off
+- ✅ Sleeping
+- ✅ Running other apps
+- ✅ Without internet
+
+---
+
+**Keep this card handy for quick reference!**
+
+Last Updated: November 14, 2025

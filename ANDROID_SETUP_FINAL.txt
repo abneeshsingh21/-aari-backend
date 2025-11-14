@@ -1,0 +1,347 @@
+# AARI Android Setup - Complete Instructions
+
+## 🎯 What You'll Have After Setup
+
+✅ **Android App** - Installed on your phone  
+✅ **Background Mode** - Auto-starts with device  
+✅ **Wake Word Detection** - Say "Hey AARI" anytime  
+✅ **Offline Support** - Works without PC (limited features)  
+✅ **Cloud Sync** - Syncs with backend every 5 minutes  
+✅ **24/7 Available** - When using cloud backend  
+
+---
+
+## 📋 STEP 1: Prepare Backend (On Your PC)
+
+### 1A: Install Python Dependencies
+```powershell
+cd "c:\Users\lenovo\Desktop\aari\VoiceAssistant"
+.\COMPLETE_SETUP.bat
+```
+
+### 1B: Create .env File
+Create file: `backend/.env`
+```
+GOOGLE_API_KEY=your_key_from_makersuite.google.com
+SENDER_EMAIL=your_gmail@gmail.com
+SENDER_PASSWORD=your_gmail_app_password
+```
+
+**How to get these:**
+- **Google API Key:** https://makersuite.google.com/app/apikey
+- **Gmail App Password:** 
+  1. Enable 2FA: https://myaccount.google.com/security
+  2. Get app password: https://myaccount.google.com/apppasswords
+  3. Select "Mail" and "Windows"
+
+### 1C: Get Your PC's IP Address
+```powershell
+ipconfig
+```
+Look for "IPv4 Address" (like `192.168.1.100`)
+
+**Write it down:** `192.168.____.__`
+
+---
+
+## 🔧 STEP 2: Build Android APK
+
+### 2A: Open in Android Studio
+1. Download Android Studio: https://developer.android.com/studio
+2. Open `android` folder
+3. Wait for Gradle sync (5-10 min)
+
+### 2B: Update Backend IP
+**File:** `android/src/main/java/com/voiceassistant/app/ApiClient.java`
+
+Find (around line 20):
+```java
+private static final String BASE_URL = "http://192.168.1.100:5000";
+```
+
+Replace `192.168.1.100` with YOUR PC's IP from Step 1C:
+```java
+private static final String BASE_URL = "http://192.168.1.120:5000";  // Example
+```
+
+### 2C: Build APK
+In Android Studio:
+- Click **Build** → **Build APK(s)**
+- Wait for completion
+- Click "Locate" to find the APK file
+
+---
+
+## 📱 STEP 3: Install on Android Phone
+
+### 3A: Connect Phone via USB
+1. Enable USB Debugging on phone:
+   - Settings → About Phone → Tap "Build Number" 7 times
+   - Settings → Developer Options → USB Debugging → ON
+2. Connect phone to PC with USB cable
+3. Allow "Allow USB debugging" on phone
+
+### 3B: Install from Android Studio
+1. In Android Studio, click **Run** (green play button)
+2. Select your phone
+3. Click OK
+4. Wait for installation (2-5 minutes)
+
+**Or manually install APK:**
+1. Find APK file from Step 2C
+2. Copy to phone
+3. Open file manager → Tap APK → Install
+
+### 3C: Launch AARI
+1. On phone, find "AARI" app
+2. Tap to open
+3. Grant all permissions when asked:
+   - ✅ Microphone
+   - ✅ Phone
+   - ✅ Contacts
+   - ✅ SMS
+   - ✅ Storage
+
+---
+
+## ⚙️ STEP 4: Configure Background Mode
+
+### 4A: Enable in App Settings
+1. Open AARI app
+2. Tap **Settings** (⚙️ icon)
+3. Enable:
+   - ✅ "Background Mode"
+   - ✅ "Always Listening"
+   - ✅ "Listen on Lock Screen"
+
+### 4B: Disable Battery Optimization (CRITICAL!)
+This allows AARI to run 24/7 in background.
+
+**Android 11+:**
+1. Settings → Apps → AARI → Battery
+2. Battery optimization → Select "Don't optimize"
+
+**Android 9-10:**
+1. Settings → Apps & Notifications → Advanced
+2. Special App Access → Battery Optimization
+3. Find AARI → Select "Don't optimize"
+
+**Android 6-8:**
+1. Settings → Battery → Battery Optimization
+2. Find AARI → Select "Don't optimize"
+
+---
+
+## 🚀 STEP 5: Start Backend Server
+
+### 5A: Keep Server Running
+On your PC, run:
+```powershell
+cd "c:\Users\lenovo\Desktop\aari\VoiceAssistant"
+.\START_BACKEND_ONLY.bat
+```
+
+**Keep this window open!** The backend must run continuously.
+
+### 5B: Verify Backend is Running
+```powershell
+# In another PowerShell window
+Invoke-WebRequest -Uri "http://192.168.1.100:5000/api/health"
+# Should see: {"status":"healthy"}
+```
+
+---
+
+## 🎤 STEP 6: Test Voice Commands
+
+### Test 1: Wake Word
+1. Say: **"Hey AARI"**
+2. Wait for response: "I'm awake. What can I do?"
+3. If you hear this, everything works! ✓
+
+### Test 2: Simple Command
+1. Say: **"Hey AARI, what time is it?"**
+2. AARI should respond with current time
+
+### Test 3: Background Mode
+1. **Close AARI app** (don't just minimize)
+2. Wait 30 seconds
+3. Say: **"Hey AARI"** (from home screen)
+4. AARI should respond from background!
+
+### Test 4: Lock Screen
+1. **Lock your phone**
+2. Say: **"Hey AARI"**
+3. Say: **"What's the weather?"**
+4. AARI responds without unlocking!
+
+---
+
+## 💡 Voice Commands You Can Use
+
+### Quick Reference
+```
+"Hey AARI, send WhatsApp to John saying hello"
+"Hey AARI, call Mom"
+"Hey AARI, what time is it?"
+"Hey AARI, what's the weather?"
+"Hey AARI, play music"
+"Hey AARI, open Chrome"
+"Hey AARI, set reminder for 3pm"
+"Hey AARI, search for Python tutorial"
+```
+
+See full list in: `ANDROID_COMPLETE_SETUP.md`
+
+---
+
+## 🔄 Optional: Setup Cloud Backend (24/7)
+
+If you want AARI to work even when your PC is off:
+
+### Deploy Backend to Heroku (Free)
+1. Create account: https://www.heroku.com
+2. Follow: `CLOUD_DEPLOYMENT_SETUP.md`
+3. Update Android app to use cloud URL
+4. Works 24/7 without PC!
+
+---
+
+## ❌ Troubleshooting
+
+### "Backend connection failed"
+- [ ] Backend server running? (Check command window)
+- [ ] Correct IP in ApiClient.java?
+- [ ] Both PC and phone on same WiFi?
+- [ ] Firewall blocking port 5000?
+
+**Solution:**
+```powershell
+# Allow port 5000 in Windows Firewall
+netsh advfirewall firewall add rule name="AARI" dir=in action=allow protocol=tcp localport=5000
+```
+
+### "Wake word not detected"
+- [ ] Background Mode enabled?
+- [ ] Battery optimization disabled?
+- [ ] Microphone working? (Settings → Sound → Test)
+- [ ] Screen not too dark (wake word detection reduces at very low light)
+
+**Solution:**
+1. Go to Settings (in AARI app)
+2. Restart Background Mode
+3. Say "Hey AARI" loudly and clearly
+
+### "App crashes on startup"
+- [ ] Clear app cache: Settings → Apps → AARI → Storage → Clear Cache
+- [ ] Reinstall the app
+- [ ] Check phone has 100MB+ free storage
+
+### "No audio output"
+- [ ] Volume not muted?
+- [ ] Speakers not plugged in?
+- [ ] Try restarting phone
+
+---
+
+## ✅ Final Verification Checklist
+
+Before you're done, verify:
+
+- [ ] Backend server running on PC
+- [ ] APK installed on Android phone
+- [ ] All permissions granted
+- [ ] Background Mode enabled
+- [ ] Battery optimization disabled
+- [ ] "Hey AARI" wake word works
+- [ ] Can execute at least 1 command
+- [ ] Works with locked screen
+- [ ] Works in background (app closed)
+
+---
+
+## 📊 After Setup: How It Works
+
+### Flow Diagram
+```
+Your Voice
+    ↓
+"Hey AARI" → Phone detects wake word
+    ↓
+VoiceAssistantService (background) → Records command
+    ↓
+Send to Backend Server (192.168.x.x:5000)
+    ↓
+Backend processes & executes command
+    ↓
+Response sent back to phone
+    ↓
+Text-to-Speech → You hear the response
+```
+
+### Auto-Sync (Every 5 Minutes)
+```
+Local Database ← → Backend Server ← → Cloud (optional)
+- Messages
+- Contacts  
+- Conversation history
+- Reminders
+```
+
+---
+
+## 🎯 What Happens When PC is Off?
+
+**If you have cloud backend:**
+- ✅ AARI still works! (Uses cloud)
+- ✅ All features available
+- ✅ Always available 24/7
+
+**If you DON'T have cloud backend:**
+- ❌ Can't access web search
+- ❌ Can't send real messages (queued)
+- ❌ Limited to local features only
+- ✅ Can type commands instead
+
+**Recommendation:** Set up cloud backend for full 24/7 access
+
+---
+
+## 🔐 Privacy & Security
+
+✅ Voice data processed locally  
+✅ No data stored on external servers  
+✅ Contacts stored only on your phone  
+✅ Clear conversation history anytime  
+
+**Clear history:**
+- AARI App → Settings → Privacy → Clear History
+
+---
+
+## 📞 Support
+
+**If something doesn't work:**
+1. Check troubleshooting section above
+2. Verify all steps completed
+3. Check backend logs (command window)
+4. Check Android Logcat in Android Studio
+
+---
+
+## 🎉 You're Ready!
+
+Your AARI Voice Assistant is now:
+- ✅ Running on your Android device
+- ✅ Auto-starting without manual opening
+- ✅ Listening 24/7 for "Hey AARI"
+- ✅ Syncing with backend automatically
+- ✅ Works even with locked screen
+- ✅ Works even in background
+
+**Enjoy your intelligent voice assistant! 🚀**
+
+---
+
+**Last Updated:** November 14, 2025  
+**Version:** Android Setup Complete

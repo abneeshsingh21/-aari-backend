@@ -1,0 +1,39 @@
+=== AARI ANDROID SETUP ===
+
+BACKEND SERVER:
+- IP Address: 192.168.29.110
+- Port: 5000
+- Start command: START_BACKEND.bat (in VoiceAssistant folder)
+- Keep running in background
+
+ANDROID CONFIGURATION:
+1. Open Android Studio
+2. Load: VoiceAssistant/android folder
+3. Wait for Gradle sync
+4. IP already configured: 192.168.29.110:5000
+5. Connect phone via USB (enable Developer Mode)
+6. Click Run (Green Play button)
+
+AUTO-START SETUP (Android):
+1. App auto-starts on device boot
+2. Say "Hey AARI" anytime to wake up
+3. Grant all permissions when prompted
+4. No manual opening needed
+
+WAKE COMMAND:
+- "Hey AARI" - Wake word (default)
+- Then speak your command
+- e.g., "Hey AARI, send message to John saying hello"
+
+FEATURES:
+✓ Messaging & WhatsApp
+✓ Phone Calls
+✓ App Downloads
+✓ Web Search
+✓ File Downloads
+✓ Reminders
+✓ System Control
+✓ Learning System
+✓ Background Service
+
+BACKEND RUNNING: http://192.168.29.110:5000/api/health

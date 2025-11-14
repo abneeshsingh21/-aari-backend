@@ -1,0 +1,17 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install dependencies
+COPY VoiceAssistantApp/package*.json ./
+
+RUN npm install
+
+# Copy app
+COPY VoiceAssistantApp/ .
+
+# Expose port
+EXPOSE 8081
+
+# Start Expo
+CMD ["npm", "start"]

@@ -1,0 +1,56 @@
+{
+  "server": {
+    "host": "0.0.0.0",
+    "port": 5000,
+    "debug": false,
+    "threaded": true,
+    "cors_enabled": true
+  },
+  "assistant": {
+    "name": "Assistant",
+    "default_language": "en",
+    "voice_speed": 150,
+    "voice_volume": 0.9,
+    "auto_startup": true,
+    "wake_word_enabled": true,
+    "wake_words": [
+      "hey assistant",
+      "assistant",
+      "hey siri",
+      "ok google"
+    ]
+  },
+  "features": {
+    "whatsapp": true,
+    "phone_calls": true,
+    "file_downloads": true,
+    "app_control": true,
+    "media_playback": true,
+    "email": true,
+    "reminders": true,
+    "web_search": true,
+    "system_control": true,
+    "nlp_processing": true,
+    "ai_responses": true
+  },
+  "privacy": {
+    "store_conversations": true,
+    "store_locations": false,
+    "encrypt_data": true,
+    "data_retention_days": 30,
+    "allow_analytics": false
+  },
+  "android": {
+    "auto_start_on_boot": true,
+    "background_service_enabled": true,
+    "lock_screen_activation": true,
+    "headset_detection": true,
+    "screen_off_listening": true,
+    "notifications_enabled": true
+  },
+  "api_keys": {
+    "google_speech_api": "enabled",
+    "google_generative_ai": "required",
+    "gmail_smtp": "optional"
+  }
+}

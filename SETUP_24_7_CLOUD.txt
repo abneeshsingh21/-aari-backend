@@ -1,0 +1,238 @@
+# Setup AARI to Work 24/7 (PC Can Be OFF)
+
+## 🎯 The Problem
+Your current setup requires the PC to be on 24/7. This wastes electricity and stops working when PC is off.
+
+## ✅ The Solution
+Deploy AARI backend to **Heroku Cloud** (free tier available) so it runs 24/7 without your PC!
+
+---
+
+## 🚀 Quick Setup (5 Minutes)
+
+### Step 1: Create Heroku Account (Free)
+1. Visit: https://www.heroku.com/signup
+2. Sign up with email
+3. Verify email
+4. Create account
+
+### Step 2: Install Heroku CLI
+**Windows:**
+```powershell
+# Download from: https://devcenter.heroku.com/articles/heroku-cli
+# Or use chocolatey:
+choco install heroku-cli
+
+# Verify:
+heroku --version
+```
+
+### Step 3: Ensure API Keys are Set
+Edit: `backend/.env`
+```
+GOOGLE_API_KEY=your_key_here
+SENDER_EMAIL=your_gmail@gmail.com
+SENDER_PASSWORD=your_app_password
+```
+
+### Step 4: Deploy to Heroku
+```powershell
+cd "c:\Users\lenovo\Desktop\aari\VoiceAssistant"
+.\DEPLOY_TO_HEROKU.bat
+```
+
+Follow the prompts. It will:
+1. Log you into Heroku
+2. Create your app
+3. Deploy code
+4. Give you a URL like: `https://aari-voice-assistant.herokuapp.com`
+
+### Step 5: Update Android App
+**File:** `android/src/main/java/com/voiceassistant/app/ApiClient.java`
+
+Change:
+```java
+private static final String BASE_URL = "http://192.168.1.100:5000";
+```
+
+To:
+```java
+private static final String BASE_URL = "https://aari-voice-assistant.herokuapp.com";
+```
+
+Replace `aari-voice-assistant` with your actual app name from Step 4.
+
+### Step 6: Rebuild & Install APK
+```
+Android Studio → Build → Build APK(s) → Install on phone
+```
+
+### Step 7: Test
+Say on your phone: **"Hey AARI, what time is it?"**
+
+AARI responds! ✓
+
+---
+
+## 💡 How It Works Now
+
+**Before (PC Required):**
+```
+Phone → (WiFi) → Your PC Backend → APIs → Response
+        (only works if PC is ON and on same WiFi)
+```
+
+**After (Cloud - 24/7):**
+```
+Phone → (Internet) → Heroku Cloud → APIs → Response
+        (works ANYWHERE, PC can be OFF!)
+```
+
+---
+
+## 🌍 You Can Now Use AARI From:
+- ✅ Home WiFi
+- ✅ Mobile data (4G/5G)
+- ✅ Coffee shop WiFi
+- ✅ Office network
+- ✅ Anywhere on Earth!
+
+And your PC can be:
+- ✅ Off
+- ✅ Sleeping
+- ✅ Running other apps
+- ✅ Without internet
+
+AARI still works! 🎉
+
+---
+
+## 💰 Cost
+
+**Heroku Free Tier:**
+- ✅ Free for testing
+- ✅ Enough for personal use (up to ~1000 requests/day)
+- ❌ Goes to sleep after 30 min inactivity
+- ❌ Limited dyno hours (550/month)
+
+**Heroku Paid ($7/month):**
+- ✅ Always running 24/7
+- ✅ Reliable, production-ready
+- ✅ Good for continuous use
+
+**Recommendation:** Start free, upgrade to paid if needed.
+
+---
+
+## 🔍 Test Your Cloud Backend
+
+```powershell
+# Check if your backend is running
+Invoke-WebRequest -Uri "https://aari-voice-assistant.herokuapp.com/api/health"
+
+# Should return:
+# {"status":"healthy"}
+```
+
+If you get an error, check:
+1. Is Heroku app name correct?
+2. Did deployment complete successfully?
+3. Check logs: `heroku logs --tail --app aari-voice-assistant`
+
+---
+
+## 🔄 Hybrid Mode (Optional)
+
+Your Android app can use BOTH backends automatically:
+1. Try local PC first (faster if on home WiFi)
+2. If PC is off, automatically use cloud
+3. No manual switching!
+
+See: `android/src/main/java/com/voiceassistant/app/ApiClient.java`
+Look for: `setupHybridMode()`
+
+---
+
+## 📱 Summary: Your Setup Is Now
+
+```
+┌─ Android Phone ─────────────────┐
+│ ┌──────────────────────────────┐│
+│ │  AARI App                    ││
+│ │  - Background Service        ││
+│ │  - Wake Word Detection       ││
+│ │  - Local Database            ││
+│ └──────────────────────────────┘│
+└─────────────────────────────────┘
+              ↓
+     Internet Connection
+         (WiFi or 4G/5G)
+              ↓
+┌─ Heroku Cloud (24/7) ──────────┐
+│ ┌──────────────────────────────┐│
+│ │  AARI Backend Server         ││
+│ │  - Python Flask              ││
+│ │  - NLP Processing            ││
+│ │  - API Integration           ││
+│ └──────────────────────────────┘│
+└─────────────────────────────────┘
+
+Your PC: CAN BE OFF! ✓
+```
+
+---
+
+## 🎯 Final Checklist
+
+- [ ] Heroku account created
+- [ ] Heroku CLI installed
+- [ ] API keys in backend/.env
+- [ ] Deployed to Heroku using DEPLOY_TO_HEROKU.bat
+- [ ] Got Heroku URL
+- [ ] Updated Android ApiClient.java
+- [ ] Rebuilt and installed APK
+- [ ] Tested "Hey AARI" command
+- [ ] Works on mobile data (not just WiFi)
+- [ ] Tested with phone far from PC
+
+---
+
+## 🆘 Troubleshooting
+
+**Q: How do I check if my backend is running?**
+```powershell
+heroku logs --tail --app your-app-name
+```
+
+**Q: My app is slow/timing out**
+- Free tier goes to sleep. Upgrade to paid.
+- Or use: https://uptimerobot.com (free service to keep it awake)
+
+**Q: How do I update the backend code?**
+```powershell
+cd backend
+git add .
+git commit -m "Updated backend"
+git push heroku main
+```
+
+**Q: Can I use a different cloud provider?**
+Yes! Also works with:
+- Google Cloud Run
+- AWS Lambda
+- Azure App Service
+- Railway.app
+- Render.com
+
+---
+
+## 🎉 You're All Set!
+
+Your AARI Voice Assistant now runs **24/7 in the cloud**!
+
+- Your phone can be anywhere
+- Your PC can be off
+- AARI is always available
+- Works on any internet connection
+
+**Enjoy your truly ubiquitous AI assistant! 🚀**

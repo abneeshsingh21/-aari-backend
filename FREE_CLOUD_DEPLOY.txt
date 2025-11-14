@@ -1,0 +1,193 @@
+# Deploy AARI to FREE Cloud (No Cost, No Credit Card)
+
+## 🎯 Best Free Option: Render.com
+
+**Why Render?**
+- ✅ Completely FREE (no credit card needed)
+- ✅ Always running (no auto-sleep like others)
+- ✅ Git-based deployment (very easy)
+- ✅ 24/7 uptime
+- ✅ Reliable for personal use
+
+---
+
+## 📋 Quick Steps (10 minutes)
+
+### Step 1: Create GitHub Account (Free)
+1. Go to: https://github.com/signup
+2. Sign up with email
+3. Create account
+
+### Step 2: Create GitHub Repository
+1. Go to: https://github.com/new
+2. Name: `aari-backend`
+3. Description: `AARI Voice Assistant Backend`
+4. Select: **Public** (important!)
+5. Click: **Create repository**
+
+### Step 3: Push AARI Code to GitHub
+```powershell
+cd "c:\Users\lenovo\Desktop\aari\VoiceAssistant\backend"
+
+# Configure Git
+git init
+git config user.email "your-email@gmail.com"
+git config user.name "Your Name"
+
+# Add and commit
+git add .
+git commit -m "AARI Backend"
+
+# Add remote (using your GitHub username: abneeshsingh21)
+git remote add origin https://github.com/abneeshsingh21/aari-backend.git
+git branch -M main
+git push -u origin main
+
+# It will ask for your GitHub username and password (or use personal token)
+```
+
+### Step 4: Create Render Account
+1. Go to: https://render.com
+2. Click: **Sign up**
+3. Select: **Sign up with GitHub**
+4. Authorize Render to access your GitHub
+
+### Step 5: Deploy to Render
+1. Go to: https://dashboard.render.com
+2. Click: **New** (+ button, top right)
+3. Select: **Web Service**
+4. Choose: `aari-backend` repository
+5. Fill in:
+   - **Name:** `aari-backend`
+   - **Runtime:** `Python`
+   - **Region:** (any)
+   - **Build Command:** 
+     ```
+     pip install -r requirements.txt && python -m spacy download en_core_web_sm
+     ```
+   - **Start Command:** 
+     ```
+     gunicorn app:app
+     ```
+
+### Step 6: Add Environment Variables
+1. Scroll to **Environment** section
+2. Add these variables (from your `.env` file):
+   - `GOOGLE_API_KEY` = (your key)
+   - `SENDER_EMAIL` = (your email)
+   - `SENDER_PASSWORD` = (your app password)
+
+3. Click: **Create Web Service**
+4. Wait 2-3 minutes for deployment
+
+### Step 7: Get Your URL
+1. On Render dashboard, click your service
+2. Copy the **Service URL** (looks like: `https://aari-backend.onrender.com`)
+
+### Step 8: Update Android App
+Edit: `android/src/main/java/com/voiceassistant/app/ApiClient.java`
+
+Find:
+```java
+private static final String CLOUD_BACKEND = "https://aari-backend.onrender.com/api";
+```
+
+Replace `aari-backend` with your actual service name from Step 7.
+
+### Step 9: Build & Install APK
+```
+Android Studio → Build → Build APK(s) → Install on phone
+```
+
+### Step 10: Test
+Say on phone: **"Hey AARI, what time is it?"**
+
+✓ AARI responds! You're done!
+
+---
+
+## 🔄 Other Free Options
+
+### Railway.app (Also Free)
+- Similar to Render
+- Free $5 credit monthly
+- https://railway.app
+- Deployment via GitHub same as Render
+
+### Replit (Limited Free)
+- https://replit.com
+- Works but with limitations
+- May sleep if not used
+
+### Oracle Cloud (Always Free)
+- https://www.oracle.com/cloud/free/
+- Truly always free tier
+- More complex setup
+- Recommended for advanced users
+
+---
+
+## 🚀 Complete Free Setup
+
+```
+You (PC)
+    ↓
+GitHub Repository (stores code)
+    ↓
+Render Cloud (runs 24/7 for FREE)
+    ↓
+Your Android Phone (works anywhere!)
+```
+
+**No costs. No credit card. Completely free!**
+
+---
+
+## 🆘 Troubleshooting
+
+**Deployment fails in Render:**
+1. Check build log in Render dashboard
+2. Common issues:
+   - Missing `requirements.txt` (should exist)
+   - Missing `Procfile` (if needed, create one)
+   - Python version mismatch
+
+**App runs but returns errors:**
+1. Check Render logs: Click service → Logs
+2. View error messages
+3. Fix in code, push to GitHub, Render auto-redeploys
+
+**Can't connect from Android:**
+1. Verify Render URL is correct
+2. Test in browser: `https://your-url.onrender.com/api/health`
+3. Should show: `{"status":"healthy"}`
+
+**App goes to sleep:**
+- Render free tier stays awake ✓
+- But check: Settings → Plan → "Never sleep" (should be enabled)
+
+---
+
+## ✅ Verification
+
+After deployment:
+
+```powershell
+# Test your Render backend
+Invoke-WebRequest -Uri "https://aari-backend.onrender.com/api/health"
+# Should return: {"status":"healthy"}
+```
+
+---
+
+## 📝 Summary: What You Get
+
+✅ **Backend running 24/7** (free, no credit card)  
+✅ **AARI works anywhere** (WiFi, 4G, 5G)  
+✅ **PC can be OFF** (no dependencies on home PC)  
+✅ **Always available** (unlike Heroku free tier)  
+✅ **No costs** (Render free tier is truly free)  
+
+---
+
+**Your AARI is now live on completely free cloud! 🚀**
