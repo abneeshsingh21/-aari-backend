@@ -1,0 +1,10 @@
+theme: null
+plugins: []
+exclude:
+  - node_modules
+  - backend
+  - VoiceAssistantApp
+  - android
+  - desktop
+  - .github
+  - bin
