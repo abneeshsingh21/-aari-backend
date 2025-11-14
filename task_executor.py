@@ -28,8 +28,6 @@ class TaskExecutor:
     def send_whatsapp_message(self, contact_name: str, message: str) -> Dict[str, Any]:
         """Send message via WhatsApp using pywhatkit"""
         try:
-            import pywhatkit as kit
-            
             # Get contact number
             contact_number = self._get_contact_number(contact_name)
             
@@ -43,8 +41,19 @@ class TaskExecutor:
             if not contact_number.startswith("+"):
                 contact_number = "+1" + contact_number  # Add country code
             
-            # Send message
-            kit.sendwhatmsg_instantly(contact_number, message, wait_time=5)
+            try:
+                import pywhatkit as kit
+                # Send message
+                kit.sendwhatmsg_instantly(contact_number, message, wait_time=5)
+            except ImportError:
+                logger.warning("pywhatkit not available, using webbrowser fallback")
+                # Fallback: open WhatsApp Web
+                url = f"https://web.whatsapp.com/send?phone={contact_number}&text={message.replace(' ', '%20')}"
+                webbrowser.open(url)
+            except Exception as e:
+                logger.warning(f"pywhatkit failed: {e}, using webbrowser fallback")
+                url = f"https://web.whatsapp.com/send?phone={contact_number}&text={message.replace(' ', '%20')}"
+                webbrowser.open(url)
             
             logger.info(f"WhatsApp message sent to {contact_name}: {message}")
             
@@ -308,10 +317,20 @@ class TaskExecutor:
     def play_media(self, media_name: str) -> Dict[str, Any]:
         """Play music or video"""
         try:
-            import pywhatkit as kit
-            
-            # Search and play on YouTube
-            kit.playonyt(media_name)
+            try:
+                import pywhatkit as kit
+                # Search and play on YouTube
+                kit.playonyt(media_name)
+            except ImportError:
+                logger.warning("pywhatkit not available, using webbrowser fallback")
+                # Fallback: open YouTube search in browser
+                url = f"https://www.youtube.com/results?search_query={media_name.replace(' ', '+')}"
+                webbrowser.open(url)
+            except Exception as e:
+                logger.warning(f"pywhatkit playback failed: {e}, using webbrowser fallback")
+                # Fallback: open YouTube search
+                url = f"https://www.youtube.com/results?search_query={media_name.replace(' ', '+')}"
+                webbrowser.open(url)
             
             logger.info(f"Playing: {media_name}")
             
@@ -495,8 +514,17 @@ class TaskExecutor:
     def search_web(self, query: str) -> Dict[str, Any]:
         """Search on web"""
         try:
-            import pywhatkit as kit
-            kit.search(query)
+            try:
+                import pywhatkit as kit
+                kit.search(query)
+            except ImportError:
+                logger.warning("pywhatkit not available, using webbrowser fallback")
+                url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
+                webbrowser.open(url)
+            except Exception as e:
+                logger.warning(f"pywhatkit search failed: {e}, using webbrowser fallback")
+                url = f"https://www.google.com/search?q={query.replace(' ', '+')}"
+                webbrowser.open(url)
             
             logger.info(f"Searching: {query}")
             
