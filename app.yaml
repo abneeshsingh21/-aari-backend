@@ -1,5 +1,5 @@
 service: aari-voice-backend
-runtime: python312
+runtime: python311
 
 env: standard
 instances: 1
