@@ -1,0 +1,11 @@
+{
+  "patterns": [
+    {
+      "command": "hello",
+      "response": "From what I understand, Good morning, avnish! I'm aari, your assistant. How can I help you today?",
+      "success": true,
+      "timestamp": "2025-11-14T06:04:35.346269",
+      "confidence": 0.9
+    }
+  ]
+}

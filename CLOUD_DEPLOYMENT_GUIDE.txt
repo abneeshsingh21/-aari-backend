@@ -1,0 +1,94 @@
+CLOUD DEPLOYMENT OPTIONS FOR AARI
+===================================
+
+To use AARI without your laptop, deploy backend to cloud:
+
+
+OPTION 1: FREE - Heroku (EASIEST)
+==================================
+1. Install Heroku CLI: https://devcenter.heroku.com/articles/heroku-cli
+2. Install Git: https://git-scm.com/download/win
+3. Run: DEPLOY_TO_CLOUD.bat (in this folder)
+4. Follow the prompts
+5. Get your cloud URL (example: https://my-aari-backend.herokuapp.com)
+6. Update Android app with this URL
+
+Steps in detail:
+a) Sign up: https://www.heroku.com/
+b) Download Heroku CLI
+c) Open command prompt
+d) Run: heroku login
+e) cd to backend folder
+f) Run: heroku create my-aari-backend
+g) Run: git push heroku master
+h) Copy the URL from output
+i) Update ApiClient.java BASE_URL with your URL
+
+
+OPTION 2: AWS EC2 Free Tier
+=============================
+1. Create AWS account: https://aws.amazon.com/
+2. Launch EC2 instance (t2.micro - free for 1 year)
+3. SSH into instance
+4. Install Python and dependencies
+5. Upload backend files
+6. Run: python app.py
+7. Use EC2 IP as backend URL
+
+
+OPTION 3: Google Cloud (Free Credits)
+=======================================
+1. Create Google Cloud account: https://cloud.google.com/
+2. Use free trial credits
+3. Deploy to Cloud Run or App Engine
+4. Set up domain
+
+
+OPTION 4: DigitalOcean (Cheapest Paid)
+========================================
+1. Create account: https://www.digitalocean.com/
+2. Create droplet ($4/month)
+3. Deploy backend there
+4. Always running, 24/7
+
+
+AFTER DEPLOYMENT:
+=================
+1. Get your cloud URL (example: https://my-aari-backend.herokuapp.com)
+2. Open Android app
+3. Go to Settings
+4. Update Backend URL to: https://your-url.herokuapp.com/api
+5. Save and restart app
+6. Test on Android: Say "Hey AARI, what time is it?"
+
+
+BENEFITS:
+=========
+✓ Works without laptop
+✓ Available 24/7 from anywhere
+✓ No WiFi needed (uses internet)
+✓ Share with family/friends
+
+DOWNSIDES:
+==========
+✗ Requires internet connection
+✗ Slightly slower (depends on server location)
+✗ May have monthly costs (except free tier)
+✗ API key exposed (consider security)
+
+
+CURRENT LOCAL SETUP:
+====================
+Your laptop: 192.168.29.110:5000
+- Works only when laptop is on
+- Same WiFi network required
+- Faster response
+
+
+RECOMMENDED:
+============
+Use Heroku Free Tier for best balance of:
+- Free
+- Easy to deploy
+- 24/7 uptime
+- Works from anywhere

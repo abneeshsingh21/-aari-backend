@@ -1,0 +1,12 @@
+{
+  "auto_update_enabled": true,
+  "update_frequency_hours": 24,
+  "last_update_check": null,
+  "last_feature_update": null,
+  "auto_learn_enabled": true,
+  "max_features": 500,
+  "backup_before_update": true,
+  "update_history": [],
+  "installed_features": [],
+  "pending_updates": []
+}
